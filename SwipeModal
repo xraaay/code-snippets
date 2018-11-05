@@ -23,26 +23,18 @@ class SwipeModal extends React.Component {
         this.toggleMentor = this.toggleMentor.bind(this);
         this.toggleCoach = this.toggleCoach.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        // this.viewCoach = this.viewCoach.bind(this);
-        // this.viewMentors = this.viewMentors.bind(this);
     }
     
     toggleModal(){
-        this.setState({
-            show: !this.state.show
-        })
+        //removed for brevity
     }
 
     shuffleResults(arr){
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
+        //removed for brevity
     }
 
     toggleCoach(){
-        coachRecommendationService.readCoachExpertiseId(359)
+        coachRecommendationService.readCoachExpertiseId(this.props.userId)
             .then(response => {
                 let unique = response.item.coachExpertiseTypeId.filter((v, i, a) => a.indexOf(v) === i); 
                 const data = {
@@ -133,10 +125,11 @@ class SwipeModal extends React.Component {
 
     render() {
         const backdropStyle = {
-            position: 'fixed',
-            width: "100%",
-            height: "100%",
-            backgroundColor: 'black',
+            //removed for brevity
+        };
+        
+        const imgStyle = {
+            //removed for brevity
         };
         const button = this.props.isMentor 
         ? <button type="button" onClick={this.toggleMentor} className="btn btn-light btn-block text-center">Connect</button>
@@ -158,9 +151,8 @@ class SwipeModal extends React.Component {
                             <div style={{ outlineType:"none", textAlign: "center", backgroundColor:"black", width:"100%", height:"100%", }}>
                             <button type="button" className="btn btn-dark float-right" onClick={this.toggleModal}>&times;</button>
                             <br></br><br></br>
-                            <div className="row" style={{ placeContent: 'space-evenly' }}>
-                                <div><span >Swipe <strong>right</strong> to make a connection</span>
-                                </div>
+                            <div className="row">
+                                <h6>Swipe <strong>right</strong> to make a connection</h6>
                             </div>
                                 <SwipeableViews
                                     enableMouseEvents 
@@ -176,11 +168,11 @@ class SwipeModal extends React.Component {
                                                    {item.firstName} {item.lastName}
                                                 </div>
                                                     <div className="card-body" style={{ pointerEvents: "none" }}>
-                                                        <img style={{ pointerEvents: "none" }} src={item.imageUrl} style={{ height: "30%", width: "30%", maxHeight: "30%", maxWidth: "30%", border: '2px solid #fff'  }} />
+                                                        <img style={{ pointerEvents: "none" }} src={item.imageUrl} style={imgStyle} />
                                                         <br/><br/>                                                        
-                                                        <div className='bio' >Bio: {item.bio}</div>
+                                                        <p>Bio: {item.bio}</p>
                                                         <br/>
-                                                        <div className='bio'>{item.yearsInBusiness} years in business</div>
+                                                        <p>{item.yearsInBusiness} years in business</p>
                                                     </div>
                                                 </div>
                                                 <button type="button" className="btn btn-light" onClick={this.toggleModal}>Exit</button>
